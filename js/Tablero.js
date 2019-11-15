@@ -47,12 +47,14 @@ class Tablero {
 
     //Devuelve el color del tablero en la casilla indicada
     getCasilla = (f, c) => {
-
+        return f,c;
     }
 
     //Cambiar el color del tablero en la casilla indicada
     setCasilla = (f, c, color) => {
-
+        this.f=f;
+        this.c=c;
+        this.color=color;
     }
 
     // Eliminamos las filas que estén completas e incrementamos la puntuación

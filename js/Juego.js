@@ -12,6 +12,8 @@ class Juego {
 
     // devuelve una pieza aleatoria
     piezaAleatoria = () => {
+        let rnd=Math.floor(Math.random()*(PIEZAS).length);
+        return new Pieza(PIEZAS[rnd][0], PIEZAS[rnd][1]);
 
     }
 

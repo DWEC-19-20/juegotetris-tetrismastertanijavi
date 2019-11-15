@@ -12,8 +12,16 @@ const PIEZAS = [
 // La clase pieza
 class Pieza {
 
+
     constructor(tetromino, color, tablero) {
         // propiedades numeroForma, tetrominioActual, posición x e y en el canvas  	
+        this.tablero = tablero; // referencia al tablero para dibujar
+        this.tetromino = tetromino; // letra de la pieza
+        this.color = color;  
+        this.tetrominoN = 0; // empezamos con la primera forma
+        this.activeTetromino = this.tetromino[this.tetrominoN];      // array según la letra de la primera forma  
+        this.x = 3; 
+        this.y = -2;  
     }
 
     // rota la piezaentre las distintas formas del tetrominio
@@ -25,7 +33,9 @@ class Pieza {
     rellenar = (color) => {}
 
     // dibuja el color de una pieza
-    dibujar = () => {}
+    dibujar = (PIEZAS) => {
+       
+    }
 
     // borra una pieza rellenandola de casillas blancas
     borrar = () => {}
