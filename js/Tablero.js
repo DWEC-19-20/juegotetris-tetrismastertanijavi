@@ -1,29 +1,49 @@
 class Tablero {
+
     constructor(filas, columnas, tamañoCuadrado, ctx) {
-         // inicializa el tablero todos los elementos de color WHITE		
+        // inicializa el tablero todos los elementos de color WHITE	
+        this.fila=filas;
+        this.columna=columnas;
+        this.tamañoCuadrado=tamañoCuadrado;
+        this.ctx = ctx;	
+        this.tablero=[];
     }
 
+
     // Es vacio si tiene el color WHITE
-    esVacio = (x, y) => {}
+    esVacio = (x, y) => { }
 
     // Dibuja un en el canvas del color recibido
     dibujarCasilla = (x, y, color) => {
         this.ctx.fillStyle = color;
-        this.ctx.fillRect(x * this.TC, y * this.TC, this.TC, this.TC);
+        this.ctx.fillRect(x * this.tamañoCuadrado, y * this.tamañoCuadrado, this.tamañoCuadrado, this.tamañoCuadrado);
         this.ctx.strokeStyle = "BLACK";
-        this.ctx.strokeRect(x * this.TC, y * this.TC, this.TC, this.TC);
+        this.ctx.strokeRect(x * this.tamañoCuadrado, y * this.tamañoCuadrado, this.tamañoCuadrado, this.tamañoCuadrado);
     }
 
     // dibujar en el canvas según los colores del tablaro
-    dibujarTablero = () => {};
+    dibujarTablero = () => {
+        for(var r=0; r < this.fila; r++) {
+            this.tablero[r]=[];
+            for (var c = 0; c < this.columna; c++) {
+                this.tablero[r][c]="white";                
+            }
+        }
 
-    get filas() {}
+        for (var r = 0; r < this.fila; r++) {
+            for (var c = 0; c < this.columna; c++) {
+                this.dibujarCasilla(c, r, this.tablero[r][c]);
+            }
+        }
+    }
 
-    set filas(fila) {}
+    get filas() {return this.filas}
 
-    get columnas() {}
+    set filas(fila) {this.filas=fila}
 
-    set columnas(columna) {}
+    get columnas() {return this.columnas}
+
+    set columnas(columna) {this.columnas=columna}
 
     //Devuelve el color del tablero en la casilla indicada
     getCasilla = (f, c) => {
@@ -36,6 +56,6 @@ class Tablero {
     }
 
     // Eliminamos las filas que estén completas e incrementamos la puntuación
-    eliminarFilasCompletas = () => {}
+    eliminarFilasCompletas = () => { }
 
 }

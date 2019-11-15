@@ -37,7 +37,8 @@ class Juego {
         let ahora = Date.now();
         let delta = ahora - this.comenzarCaer;
         if (delta > 1000) {
-            this.pieza.moverAbajo();
+            //this.pieza.moverAbajo();
+            console.log("cae pieza");
             this.comenzarCaer = Date.now();
         }
         if (!this.gameOver) {
