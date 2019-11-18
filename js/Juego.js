@@ -12,8 +12,8 @@ class Juego {
 
     // devuelve una pieza aleatoria
     piezaAleatoria = () => {
-        let rnd=Math.floor(Math.random()*(PIEZAS).length);
-        return new Pieza(PIEZAS[rnd][0], PIEZAS[rnd][1]);
+        let piezaR=Math.floor(Math.random()*PIEZAS.length);
+        return new Pieza (PIEZAS[piezaR][0],PIEZAS[piezaR][1],this.tablero);
 
     }
 
@@ -39,8 +39,7 @@ class Juego {
         let ahora = Date.now();
         let delta = ahora - this.comenzarCaer;
         if (delta > 1000) {
-            //this.pieza.moverAbajo();
-            console.log("cae pieza");
+            this.pieza.moverAbajo();
             this.comenzarCaer = Date.now();
         }
         if (!this.gameOver) {
@@ -59,6 +58,7 @@ class Juego {
             this.pieza.moverDerecha();
             this.comenzarCaer = Date.now();
         } else if (event.keyCode == 40) {
+
             this.pieza.moverAbajo();
         }
     }
