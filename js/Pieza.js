@@ -50,11 +50,19 @@ class Pieza {
 
     // mover abajo la pieza, si queda fijada, deberá obtener una nueva
     moverAbajo = () => {
+        /*if (this.colision(x,y++,this.activeTetromino)){
+            this.fijar();
+        }else{*/
+        if(this.y<20){
         this.borrar();
         this.y++;
         this.dibujar();
+        
+        console.log(this.tablero.tablero);
+        } else{
+            this.fijar();
+        }
     }
-
     // mover derecha la pieza hasta chocar con la pared 
     moverDerecha = () => {
         this.borrar();
@@ -64,40 +72,37 @@ class Pieza {
 
     // mover izquierda la pieza hasta chocar con la pared 
     moverIzquierda = () => {
-        if (!this.colision(this.x,this.y--,this.activeTetromino)){
-            this.borrar();
-            this.x--;
-            this.dibujar();} else{
-                this.fijar();
-            }
-        
-    }
-}
-    // fijar pieza cuando choca con el suelo u otra pieza
-    // hay que comprobar si se ha formado una o varias lineas para borrarlas 
-    fijar = () => { 
-        for (r=0;r<this.activeTetromino.length;r++){
-            for(c=0;c<this.activeTetromino.length;c++){
-                if(!this.activeTetromino[r][c]){
-                    continue;
-                } if (this.y+r<0){
-                    gameover=true;
-                }
-                board[this.y+r][this.x+c]=this.color;
-            }
-        }
+        this.borrar();
+        this.x--;
+        this.dibujar();
     }
 
-    // Comprueba si se produce una colisión de una pieza con el suelo u otra pieza 
-    colision = (x, y, param) => {
-      for (var a=0;a<this.param.length;a++){
-        for (var b=0;b<this.param.length;b++){
-            if (!param[a][b]){
-                if (x<0||x>=a||y>=0){
-              return true;
+// fijar pieza cuando choca con el suelo u otra pieza
+// hay que comprobar si se ha formado una o varias lineas para borrarlas 
+fijar = () => {
+    for (var r = 0; r < this.activeTetromino.length; r++) {
+        for (var c = 0; c < this.activeTetromino.length; c++) {
+            if (!this.activeTetromino[r][c]) {
+                continue;
+            } if (this.y + r < 0) {
+                gameover = true;
             }
-            }
-            
+            this.tablero.setCasilla(r,c,this.color);
         }
-      }
     }
+    console.log("quieto parao");
+    Juego._pieza = juego.piezaAleatoria();    
+    console.log(juego._pieza);
+}
+
+// Comprueba si se produce una colisión de una pieza con el suelo u otra pieza 
+colision = (x, y, pieza) => {
+    if(x>=0 && x<10 && y<20){
+        if (this.tablero.esVacio(x,y)) return true;
+        else return false;
+    }
+    else return false;
+
+}
+    
+}

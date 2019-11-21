@@ -11,7 +11,10 @@ class Tablero {
 
 
     // Es vacio si tiene el color WHITE
-    esVacio = (x, y) => { }
+    esVacio = (x, y) => {
+        if(this.tablero[y][x]=="white") return true;
+        else return false;
+     }
 
     // Dibuja un en el canvas del color recibido
     dibujarCasilla = (x, y, color) => {
@@ -47,14 +50,12 @@ class Tablero {
 
     //Devuelve el color del tablero en la casilla indicada
     getCasilla = (f, c) => {
-        return f,c;
+        return this.tablero[f][c];
     }
 
     //Cambiar el color del tablero en la casilla indicada
     setCasilla = (f, c, color) => {
-        this.f=f;
-        this.c=c;
-        this.color=color;
+        this.tablero[f][c]=color;
     }
 
     // Eliminamos las filas que estén completas e incrementamos la puntuación
