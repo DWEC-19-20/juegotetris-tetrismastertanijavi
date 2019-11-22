@@ -2,16 +2,22 @@ class Tablero {
 
     constructor(filas, columnas, tamañoCuadrado, ctx) {
         // inicializa el tablero todos los elementos de color WHITE	
-        this.fila=filas;
-        this.columna=columnas;
-        this.tamañoCuadrado=tamañoCuadrado;
-        this.ctx = ctx;	
-        this.tablero=[];
+        this.fila = filas;
+        this.columna = columnas;
+        this.tamañoCuadrado = tamañoCuadrado;
+        this.ctx = ctx;
+        this.tablero = [];
     }
 
 
     // Es vacio si tiene el color WHITE
-    esVacio = (x, y) => { }
+    esVacio = (x, y) => {
+        if (this.tablero[y][x] == "white") {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // Dibuja un en el canvas del color recibido
     dibujarCasilla = (x, y, color) => {
@@ -23,10 +29,10 @@ class Tablero {
 
     // dibujar en el canvas según los colores del tablaro
     dibujarTablero = () => {
-        for(var r=0; r < this.fila; r++) {
-            this.tablero[r]=[];
+        for (var r = 0; r < this.fila; r++) {
+            this.tablero[r] = [];
             for (var c = 0; c < this.columna; c++) {
-                this.tablero[r][c]="white";                
+                this.tablero[r][c] = "white";
             }
         }
 
@@ -37,22 +43,22 @@ class Tablero {
         }
     }
 
-    get filas() {return this.filas}
+    get filas() { return this.filas }
 
-    set filas(fila) {this.filas=fila}
+    set filas(fila) { this.filas = fila }
 
-    get columnas() {return this.columnas}
+    get columnas() { return this.columnas }
 
-    set columnas(columna) {this.columnas=columna}
+    set columnas(columna) { this.columnas = columna }
 
     //Devuelve el color del tablero en la casilla indicada
     getCasilla = (f, c) => {
-
+        return this.tablero[f][c];
     }
 
     //Cambiar el color del tablero en la casilla indicada
     setCasilla = (f, c, color) => {
-
+        this.tablero[f][c] = color;
     }
 
     // Eliminamos las filas que estén completas e incrementamos la puntuación
