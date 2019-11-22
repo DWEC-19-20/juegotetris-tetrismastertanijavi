@@ -38,8 +38,8 @@ class Pieza {
     rellenar = (color) => {
         for (var i = 0; i < this.activeTetromino.length; i++) {
             for (var j = 0; j < this.activeTetromino.length; j++) {
-                if (this.activeTetromino[i][j]) {
-                    this.tablero.dibujarCasilla(this.x + i, this.y + j, color);
+                if (this.activeTetromino[j][i]) {
+                    this.tablero.dibujarCasilla(this.x + j, this.y + i, color);
                 }
             }
         }
@@ -55,7 +55,8 @@ class Pieza {
 
     // mover abajo la pieza, si queda fijada, deberá obtener una nueva
     moverAbajo = () => {
-        if (this.colision(,, this.activeTetromino)==false) {
+       
+        if (this.y<15) {
             this.borrar();
             this.y++;
             this.dibujar();
@@ -93,9 +94,10 @@ class Pieza {
                     alert("Game Over");
                     break;
                 }
-                this.tablero.setCasilla(r, c, this.color);
+                this.tablero.tablero[this.y+r][this.x+c]=this.color;
             }
         }
+        console.log(this.tablero.tablero);
         juego._pieza = juego.piezaAleatoria();
     }
 
@@ -109,7 +111,7 @@ class Pieza {
                 }
                 let nuevaX = this.x + c + x;
                 let nuevaY = this.y + f + y;
-                if (nuevaX < 0 || nuevaX >= this.tablero.columna || nuevaY >= this.tablero.fila) {
+                if (nuevaX < 0 || nuevaX >= this.tablero.columnas || nuevaY >= this.tablero.filas) {
                     return true; // sale del tablero
                 }
                 if(nuevaY < 0){ // para evitar acceder a tablero[-1]

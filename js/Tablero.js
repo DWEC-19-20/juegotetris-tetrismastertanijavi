@@ -25,6 +25,7 @@ class Tablero {
         this.ctx.fillRect(x * this.tamañoCuadrado, y * this.tamañoCuadrado, this.tamañoCuadrado, this.tamañoCuadrado);
         this.ctx.strokeStyle = "BLACK";
         this.ctx.strokeRect(x * this.tamañoCuadrado, y * this.tamañoCuadrado, this.tamañoCuadrado, this.tamañoCuadrado);
+   
     }
 
     // dibujar en el canvas según los colores del tablaro
@@ -62,6 +63,27 @@ class Tablero {
     }
 
     // Eliminamos las filas que estén completas e incrementamos la puntuación
-    eliminarFilasCompletas = () => { }
+    eliminarFilasCompletas = () => {
+        for(let r=0; r<this.filas;r++){
+
+            let filallena=true;
+            for (let c=0; c<this.columnas;c++){
+                filallena=filallena && (tablero[r][c]!="white");
+            }
+            if (filallena){
+                for(let y=r;y>1;y--){
+                    for (let c=0;c<this.columnas;c++){
+                        this.tablero[y][c]=board[y-1][c];
+                    }
+                }
+
+                for (c=0;c<this.columnas;c++){
+                    this.tablero[0][c]="white";
+                }
+                
+            }
+        }
+        this.dibujarTablero();
+     }
 
 }
