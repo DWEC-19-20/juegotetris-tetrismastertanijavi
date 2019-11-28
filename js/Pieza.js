@@ -99,11 +99,14 @@ class Pieza {
                     alert("Game Over");
                     break;
                 }
+
                 this.tablero.tablero[this.y + r][this.x + c] = this.color;
             }
+        
+            
         }
+        juego._tablero.eliminarFilasCompletas();
     }
-
     // Comprueba si se produce una colisión de una pieza con el suelo u otra pieza 
     colision = (x, y, pieza) => {
         for (var f = 0; f < pieza.length; f++) {

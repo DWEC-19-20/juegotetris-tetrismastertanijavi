@@ -62,6 +62,27 @@ class Tablero {
     }
 
     // Eliminamos las filas que estén completas e incrementamos la puntuación
-    eliminarFilasCompletas = () => { }
+    eliminarFilasCompletas = () => {
+        for (let r = 0; r < this.fila; r++) {
+            let filaLlena = true;
+            for (let c = 0; c < this.columna; c++) {
+                filaLlena = filaLlena && (this.tablero[r][c] != "white");
+            }
+            if (filaLlena) {
+                console.log('wtf');
+                for (let y = r; y > 1; y--) {
+                    for (let c = 0; c < this.columna; c++) {
+                        this.tablero[y][c] = this.tablero[y - 1][c];
+                    }
+}
+                    for (c = 0; c < this.tablero.columna; c++) {
+                        this.tablero[0][c] = "white";
+                    }
+                
+                score += 10;
+                scoreElement.innerHTML = score;
+            }
+        }
+    }
 
 }
