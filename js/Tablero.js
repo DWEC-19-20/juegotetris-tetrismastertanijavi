@@ -62,6 +62,31 @@ class Tablero {
     }
 
     // Eliminamos las filas que estén completas e incrementamos la puntuación
-    eliminarFilasCompletas = () => { }
+    eliminarFilasCompletas = () => { 
+        for(let r = 0; r < this.fila; r++){
+            let filaLlena = true;
+            for(let c = 0; c < this.columna; c++){
+                filaLlena = filaLlena && (this.tablero[r][c] != "white");
+            }
+            if(filaLlena){
+                for(let y = r; y > 1; y--){
+                    for(let c = 0; c < this.columna; c++){
+                        this.tablero[y][c] = this.tablero[y-1][c];
+                    }
+                }
+                for(let c = 0; c < this.columna; c++){
+                    this.tablero[0][c] = "white";
+                }
+
+                juego.score += 10;
+            }
+        }
+        for (var r = 0; r < this.fila; r++) {
+            for (var c = 0; c < this.columna; c++) {
+                this.dibujarCasilla(c, r, this.tablero[r][c]);
+            }
+        }
+        //scoreElement.innerHTML = juego.score;
+    }
 
 }

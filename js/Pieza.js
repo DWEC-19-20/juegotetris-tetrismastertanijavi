@@ -25,11 +25,24 @@ class Pieza {
     // rota la piezaentre las distintas formas del tetrominio
     // de debe controlar que si está muy cerca de las paredes algunas no pueden girar
     rotar = () => {
-        this.borrar();
-        this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
-        this.activeTetromino = this.tetromino[this.tetrominoN];
-        this.dibujar();
-        this.tablero.caer();
+        let wallkick = 0;
+        let siguienteForma = this.tetromino[(this.tetrominoN+1)%this.tetromino.length];
+        if (this.colision(0, 0, siguienteForma)) {
+            if (this.x > 5) {
+                wallkick = -1;
+            } else {
+                wallkick = 1;
+            }
+        }
+
+        if (!this.colision(wallkick, 0, siguienteForma)) {
+            this.borrar();
+            this.x = this.x + wallkick;
+            this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
+            this.activeTetromino = this.tetromino[this.tetrominoN];
+            this.dibujar();
+            this.tablero.caer();
+        }
     }
 
 
@@ -102,6 +115,7 @@ class Pieza {
                 this.tablero.tablero[this.y + r][this.x + c] = this.color;
             }
         }
+        juego._tablero.eliminarFilasCompletas();
     }
 
     // Comprueba si se produce una colisión de una pieza con el suelo u otra pieza 
@@ -120,7 +134,7 @@ class Pieza {
                 if (nuevaY < 0) { // para evitar acceder a tablero[-1]
                     continue;
                 }
-                if (this.tablero.tablero[nuevaY][nuevaX]!="white") {
+                if (this.tablero.tablero[nuevaY][nuevaX] != "white") {
                     return true;
                 }
 
