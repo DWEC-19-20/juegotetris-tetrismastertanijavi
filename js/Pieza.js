@@ -19,13 +19,12 @@ class Pieza {
         this.tetrominoN = 0; // empezamos con la primera forma
         this.activeTetromino = this.tetromino[this.tetrominoN];      // array según la letra de la primera forma  
         this.x = 4;
-        this.y = -4;
+        this.y = -3;
     }
 
     // rota la piezaentre las distintas formas del tetrominio
     // de debe controlar que si está muy cerca de las paredes algunas no pueden girar
     rotar = () => {
-
         this.borrar();
         this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
         this.activeTetromino = this.tetromino[this.tetrominoN];
@@ -39,7 +38,8 @@ class Pieza {
         for (var i = 0; i < this.activeTetromino.length; i++) {
             for (var j = 0; j < this.activeTetromino.length; j++) {
                 if (this.activeTetromino[i][j]) {
-                    this.tablero.dibujarCasilla(this.x + i, this.y + j, color);
+                    this.tablero.dibujarCasilla(this.x + j, this.y + i, color);
+
                 }
             }
         }
@@ -55,29 +55,35 @@ class Pieza {
 
     // mover abajo la pieza, si queda fijada, deberá obtener una nueva
     moverAbajo = () => {
-        if (this.colision(,, this.activeTetromino)==false) {
+
+        if (!this.colision(0, 1, this.activeTetromino)) {
             this.borrar();
             this.y++;
             this.dibujar();
         } else {
             this.fijar();
+            juego._pieza = juego.piezaAleatoria();
         }
     }
 
     // mover derecha la pieza hasta chocar con la pared 
     moverDerecha = () => {
-        this.borrar();
-        this.x++;
-        this.dibujar();
-        this.tablero.caer();
+        if (!this.colision(1, 0, this.activeTetromino)) {
+            this.borrar();
+            this.x++;
+            this.dibujar();
+            this.tablero.caer();
+        }
     }
 
     // mover izquierda la pieza hasta chocar con la pared 
     moverIzquierda = () => {
-        this.borrar();
-        this.x--;
-        this.dibujar();
-        this.tablero.caer();
+        if (!this.colision(-1, 0, this.activeTetromino)) {
+            this.borrar();
+            this.x--;
+            this.dibujar();
+            this.tablero.caer();
+        }
     }
 
     // fijar pieza cuando choca con el suelo u otra pieza
@@ -93,10 +99,9 @@ class Pieza {
                     alert("Game Over");
                     break;
                 }
-                this.tablero.setCasilla(r, c, this.color);
+                this.tablero.tablero[this.y + r][this.x + c] = this.color;
             }
         }
-        juego._pieza = juego.piezaAleatoria();
     }
 
     // Comprueba si se produce una colisión de una pieza con el suelo u otra pieza 
@@ -112,13 +117,13 @@ class Pieza {
                 if (nuevaX < 0 || nuevaX >= this.tablero.columna || nuevaY >= this.tablero.fila) {
                     return true; // sale del tablero
                 }
-                if(nuevaY < 0){ // para evitar acceder a tablero[-1]
+                if (nuevaY < 0) { // para evitar acceder a tablero[-1]
                     continue;
                 }
-                if(!this.tablero.esVacio(nuevaY,nuevaX)){
+                if (this.tablero.tablero[nuevaY][nuevaX]!="white") {
                     return true;
-              }
-          
+                }
+
             }
         }
         return false;
