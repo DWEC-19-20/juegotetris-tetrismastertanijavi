@@ -7,12 +7,12 @@ class Juego {
         this.gameOver = false;
         this._comenzarCaer = Date.now();
         this.score = 0;
-
     }
 
     // devuelve una pieza aleatoria
     piezaAleatoria = () => {
-
+        let piezaR = Math.floor(Math.random() * PIEZAS.length);
+        return new Pieza(PIEZAS[piezaR][0], PIEZAS[piezaR][1], this.tablero);
     }
 
     get tablero() {
