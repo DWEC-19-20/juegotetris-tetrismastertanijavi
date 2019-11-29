@@ -86,7 +86,7 @@ class Tablero {
                 this.dibujarCasilla(c, r, this.tablero[r][c]);
             }
         }
-        //scoreElement.innerHTML = juego.score;
+        document.getElementById("score").innerHTML = juego.score;
     }
 
 }
