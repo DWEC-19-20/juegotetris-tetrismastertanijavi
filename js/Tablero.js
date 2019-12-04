@@ -12,7 +12,7 @@ class Tablero {
 
     // Es vacio si tiene el color WHITE
     esVacio = (x, y) => {
-        if (this.tablero[y][x] == "white") {
+        if (this.tablero[y][x] == "#2a3958") {
             return true;
         } else {
             return false;
@@ -23,7 +23,7 @@ class Tablero {
     dibujarCasilla = (x, y, color) => {
         this.ctx.fillStyle = color;
         this.ctx.fillRect(x * this.tamañoCuadrado, y * this.tamañoCuadrado, this.tamañoCuadrado, this.tamañoCuadrado);
-        this.ctx.strokeStyle = "BLACK";
+        this.ctx.strokeStyle = "white";
         this.ctx.strokeRect(x * this.tamañoCuadrado, y * this.tamañoCuadrado, this.tamañoCuadrado, this.tamañoCuadrado);
     }
 
@@ -32,7 +32,7 @@ class Tablero {
         for (var r = 0; r < this.fila; r++) {
             this.tablero[r] = [];
             for (var c = 0; c < this.columna; c++) {
-                this.tablero[r][c] = "white";
+                this.tablero[r][c] = "#2a3958";
             }
         }
 
@@ -66,7 +66,7 @@ class Tablero {
         for(let r = 0; r < this.fila; r++){
             let filaLlena = true;
             for(let c = 0; c < this.columna; c++){
-                filaLlena = filaLlena && (this.tablero[r][c] != "white");
+                filaLlena = filaLlena && (this.tablero[r][c] != "#2a3958");
             }
             if(filaLlena){
                 for(let y = r; y > 1; y--){
@@ -75,7 +75,7 @@ class Tablero {
                     }
                 }
                 for(let c = 0; c < this.columna; c++){
-                    this.tablero[0][c] = "white";
+                    this.tablero[0][c] = "#2a3958";
                 }
 
                 juego.score += 10;

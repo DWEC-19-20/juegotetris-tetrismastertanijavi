@@ -1,11 +1,11 @@
 const PIEZAS = [
-    [Z, "orange"],
-    [S, "cyan"],
-    [T, "green"],
-    [O, "grey"],
-    [L, "purple"],
-    [I, "red"],
-    [J, "yellow"]
+    [Z, "#6590a3"],
+    [S, "#d4cfcf"],
+    [T, "#40798C"],
+    [O, "#70A9A1"],
+    [L, "#4983ba"],
+    [I, "#918ebd"],
+    [J, "#854e68"]
 ];
 
 // La clase pieza
@@ -64,7 +64,7 @@ class Pieza {
     }
 
     // borra una pieza rellenandola de casillas blancas
-    borrar = () => { this.rellenar("white") }
+    borrar = () => { this.rellenar("#2a3958") }
 
     // mover abajo la pieza, si queda fijada, deberá obtener una nueva
     moverAbajo = () => {
@@ -134,7 +134,7 @@ class Pieza {
                 if (nuevaY < 0) { // para evitar acceder a tablero[-1]
                     continue;
                 }
-                if (this.tablero.tablero[nuevaY][nuevaX] != "white") {
+                if (this.tablero.tablero[nuevaY][nuevaX] != "#2a3958") {
                     return true;
                 }
 
